@@ -1,0 +1,55 @@
+package com.example.encartados
+
+import android.app.Dialog
+import android.content.Context
+import android.os.Bundle
+import com.example.encartados.databinding.DialogCartBinding
+
+class CartDialog(context: Context, private val cart: Cart, private val onPurchaseCompleted: () -> Unit) : Dialog(context) {
+
+    private lateinit var binding: DialogCartBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DialogCartBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val cartItems = cart.getItems()
+        val adapter = CartAdapter(cartItems, { cartItem ->
+            cart.removeItem(cartItem)
+            updateCartView()
+        }, { cartItem ->
+            returnStock(cartItem)
+        })
+        binding.recyclerViewCart.adapter = adapter
+
+        updateCartView()
+
+        binding.btnPurchase.setOnClickListener {
+            cart.clear()
+            onPurchaseCompleted()
+            dismiss()
+        }
+
+        binding.btnCancel.setOnClickListener {
+            dismiss()
+        }
+
+        binding.btnClearCart.setOnClickListener {
+            cart.getItems().forEach { returnStock(it) }
+            cart.clear()
+            updateCartView()
+        }
+    }
+
+    private fun updateCartView() {
+        val cartItems = cart.getItems()
+        val totalAmount = cartItems.sumOf { it.stockItem.price * it.quantity }
+        binding.tvTotalAmount.text = "Total: $$totalAmount"
+        (binding.recyclerViewCart.adapter as CartAdapter).updateItems(cartItems)
+    }
+
+    private fun returnStock(cartItem: CartItem) {
+        cartItem.stockItem.quantity += cartItem.quantity
+    }
+}
