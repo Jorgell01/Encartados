@@ -9,43 +9,37 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvTotalAmount"
+        <EditText
+            android:id="@+id/etItemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total: $0.00"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:hint="Item Name"
+            android:inputType="text" />
 
-        <TextView
-            android:id="@+id/tvItemsList"
+        <EditText
+            android:id="@+id/etItemQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Items:"
-            android:textSize="16sp" />
+            android:hint="Item Quantity"
+            android:inputType="number" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewCart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/btnPurchase"
+        <EditText
+            android:id="@+id/etItemPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Purchase" />
+            android:hint="Item Price"
+            android:inputType="numberDecimal" />
 
         <Button
-            android:id="@+id/btnClearCart"
+            android:id="@+id/btnEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Clear Cart" />
+            android:text="Save" />
 
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cancel" />
-
     </LinearLayout>
 </ScrollView>

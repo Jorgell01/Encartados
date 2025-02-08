@@ -75,13 +75,18 @@ class LoginActivity : AppCompatActivity() {
             val userId = cursor.getInt(cursor.getColumnIndexOrThrow(UserDatabaseHelper.COLUMN_ID))
             val userName = cursor.getString(cursor.getColumnIndexOrThrow(UserDatabaseHelper.COLUMN_NAME))
 
+            // Save user info in SharedPreferences
+            val sharedPreferences = getSharedPreferences("user_preferences", MODE_PRIVATE)
+            with(sharedPreferences.edit()) {
+                putInt("USER_ID", userId)
+                putString("USER_NAME", userName)
+                putString("USER_EMAIL", email)
+                apply()
+            }
+
             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
 
-            val intent = Intent(this, MainActivity::class.java).apply {
-                putExtra("USER_ID", userId)
-                putExtra("USER_NAME", userName)
-                putExtra("USER_EMAIL", email)
-            }
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         } else {

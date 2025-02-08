@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="primary">#6200EE</color> <!-- Un tono púrpura (puedes cambiarlo) -->
+    <color name="primaryVariant">#3700B3</color> <!-- Variante del color principal -->
+    <color name="secondary">#03DAC5</color> <!-- Color secundario (verde azulado) -->
+
+    <!-- Colores de fondo y texto -->
+    <color name="background">#FFFFFF</color> <!-- Fondo blanco -->
+    <color name="surface">#F5F5F5</color> <!-- Superficie gris claro -->
+    <color name="onPrimary">#FFFFFF</color> <!-- Texto sobre el color principal (blanco) -->
+    <color name="onSecondary">#000000</color> <!-- Texto sobre el color secundario (negro) -->
+    <color name="onBackground">#000000</color> <!-- Texto sobre el fondo (negro) -->
+    <color name="onSurface">#000000</color> <!-- Texto sobre la superficie (negro) -->
 </resources>

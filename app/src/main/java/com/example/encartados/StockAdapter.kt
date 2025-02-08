@@ -5,11 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.encartados.databinding.ItemStockBinding
 
-data class StockItem(val id: Int, val name: String, var quantity: Int, val price: Double)
+data class StockItem(val id: Int, val name: String, var quantity: Int, val price: Double, val imageResId: Int)
 
 class StockAdapter(
     private var items: MutableList<StockItem>,
-    private val onItemClicked: (StockItem) -> Unit
+    private val onItemClicked: (StockItem) -> Unit,
+    private val onEditItem: (StockItem) -> Unit,
+    private val onDeleteItem: (StockItem) -> Unit
 ) : RecyclerView.Adapter<StockAdapter.StockViewHolder>() {
 
     inner class StockViewHolder(val binding: ItemStockBinding) : RecyclerView.ViewHolder(binding.root)
@@ -23,9 +25,19 @@ class StockAdapter(
         val item = items[position]
         holder.binding.tvItemName.text = item.name
         holder.binding.tvItemStock.text = "Stock: ${item.quantity}"
+        holder.binding.tvItemPrice.text = "Price: $${item.price}"
+        holder.binding.ivItemImage.setImageResource(item.imageResId)
 
-        holder.itemView.setOnClickListener {
+        holder.binding.root.setOnClickListener {
             onItemClicked(item)
+        }
+
+        holder.binding.btnEdit.setOnClickListener {
+            onEditItem(item)
+        }
+
+        holder.binding.btnDelete.setOnClickListener {
+            onDeleteItem(item)
         }
     }
 

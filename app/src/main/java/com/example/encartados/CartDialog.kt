@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import com.example.encartados.databinding.DialogCartBinding
 
+// CartDialog.kt
 class CartDialog(context: Context, private val cart: Cart, private val onPurchaseCompleted: () -> Unit) : Dialog(context) {
 
     private lateinit var binding: DialogCartBinding
@@ -17,6 +18,7 @@ class CartDialog(context: Context, private val cart: Cart, private val onPurchas
         val cartItems = cart.getItems()
         val adapter = CartAdapter(cartItems, { cartItem ->
             cart.removeItem(cartItem)
+            returnStock(cartItem)
             updateCartView()
         }, { cartItem ->
             returnStock(cartItem)
@@ -47,6 +49,10 @@ class CartDialog(context: Context, private val cart: Cart, private val onPurchas
         val totalAmount = cartItems.sumOf { it.stockItem.price * it.quantity }
         binding.tvTotalAmount.text = "Total: $$totalAmount"
         (binding.recyclerViewCart.adapter as CartAdapter).updateItems(cartItems)
+
+        // Update the list of items in the cart
+        val itemsList = cartItems.joinToString("\n") { "${it.stockItem.name}: ${it.quantity}" }
+        binding.tvItemsList.text = itemsList
     }
 
     private fun returnStock(cartItem: CartItem) {

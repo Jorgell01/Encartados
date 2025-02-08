@@ -8,9 +8,10 @@
     android:gravity="center">
 
     <ImageView
+        android:id="@+id/logoImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/pokemon_logo"
         android:contentDescription="@string/app_logo" />
 
     <com.google.android.material.textfield.TextInputLayout

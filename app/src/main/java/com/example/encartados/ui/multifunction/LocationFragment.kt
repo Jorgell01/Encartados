@@ -1,4 +1,3 @@
-// LocationFragment.kt
 package com.example.encartados.ui.multifunction
 
 import android.Manifest
@@ -10,7 +9,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.encartados.databinding.FragmentLocationBinding
@@ -27,6 +25,16 @@ class LocationFragment : Fragment() {
         _binding = FragmentLocationBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.buttonRefresh.setOnClickListener {
+            updateLocation()
+        }
+
+        updateLocation()
+
+        return root
+    }
+
+    private fun updateLocation() {
         val locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -40,8 +48,6 @@ class LocationFragment : Fragment() {
                 binding.textBearing.text = "Bearing: ${it.bearing}"
             }
         }
-
-        return root
     }
 
     override fun onDestroyView() {

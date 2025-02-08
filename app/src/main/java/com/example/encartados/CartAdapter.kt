@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.encartados.databinding.ItemCartBinding
 
+// CartAdapter.kt
 class CartAdapter(
     private var items: List<CartItem>,
     private val onRemoveItem: (CartItem) -> Unit,
@@ -22,7 +23,8 @@ class CartAdapter(
         val item = items[position]
         holder.binding.tvItemName.text = item.stockItem.name
         holder.binding.tvItemQuantity.text = item.quantity.toString()
-        holder.binding.tvItemPrice.text = "$${item.stockItem.price * item.quantity}"
+        holder.binding.tvItemPrice.text = "Price: $${item.stockItem.price}"
+        holder.binding.tvItemTotalPrice.text = "Total: $${item.stockItem.price * item.quantity}"
 
         holder.binding.btnRemove.setOnClickListener {
             onReturnStock(item)

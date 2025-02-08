@@ -2,10 +2,14 @@
 package com.example.encartados
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -21,9 +25,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        sharedPreferences = getSharedPreferences("user_preferences", MODE_PRIVATE)
+        val isDarkMode = sharedPreferences.getBoolean("dark_mode", false)
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -41,11 +54,39 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         navView.setNavigationItemSelectedListener(this)
+
+        // Retrieve user info from SharedPreferences
+        val userName = sharedPreferences.getString("USER_NAME", "")
+        val userEmail = sharedPreferences.getString("USER_EMAIL", "")
+
+        // Update the header of the Navigation Drawer
+        val headerView: View = navView.getHeaderView(0)
+        val navHeaderTitle: TextView = headerView.findViewById(R.id.nav_header_title)
+        val navHeaderSubtitle: TextView = headerView.findViewById(R.id.textView)
+        navHeaderTitle.text = userName
+        navHeaderSubtitle.text = userEmail
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main, menu)
+        menuInflater.inflate(R.menu.menu_settings, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_change_theme -> {
+                val isDarkMode = sharedPreferences.getBoolean("dark_mode", false)
+                if (isDarkMode) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    sharedPreferences.edit().putBoolean("dark_mode", false).apply()
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    sharedPreferences.edit().putBoolean("dark_mode", true).apply()
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -55,22 +96,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_home -> {
-                // Handle home action
-            }
-            R.id.nav_gallery -> {
-                // Handle gallery action
-            }
-            R.id.nav_multi_function -> {
-                val intent = Intent(this, MultiFunctionActivity::class.java)
-                startActivity(intent)
-            }
             R.id.nav_slideshow -> {
                 val intent = Intent(this, AudioRecorderActivity::class.java)
                 startActivity(intent)
             }
             R.id.nav_stock -> {
                 val intent = Intent(this, StockActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_multi_function -> {
+                val intent = Intent(this, MultiFunctionActivity::class.java)
                 startActivity(intent)
             }
             R.id.nav_logout -> {

@@ -8,7 +8,7 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
 
     companion object {
         private const val DATABASE_NAME = "user.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 3
         const val TABLE_USERS = "users"
         const val COLUMN_ID = "id"
         const val COLUMN_EMAIL = "email"
@@ -20,6 +20,7 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         const val COLUMN_ITEM_NAME = "item_name"
         const val COLUMN_ITEM_QUANTITY = "item_quantity"
         const val COLUMN_ITEM_PRICE = "item_price"
+        const val COLUMN_ITEM_IMAGE = "item_image" // Nueva columna
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -34,7 +35,8 @@ class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
                 + "$COLUMN_STOCK_ID INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "$COLUMN_ITEM_NAME TEXT,"
                 + "$COLUMN_ITEM_QUANTITY INTEGER,"
-                + "$COLUMN_ITEM_PRICE REAL)")
+                + "$COLUMN_ITEM_PRICE REAL,"
+                + "$COLUMN_ITEM_IMAGE INTEGER)") // Nueva columna
         db.execSQL(createStockTable)
     }
 

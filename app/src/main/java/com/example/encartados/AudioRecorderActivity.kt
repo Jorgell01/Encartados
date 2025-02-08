@@ -1,6 +1,7 @@
 package com.example.encartados
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.media.MediaRecorder
@@ -55,6 +56,11 @@ class AudioRecorderActivity : AppCompatActivity() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), 0)
         }
+
+        findViewById<Button>(R.id.buttonBackToHome).setOnClickListener {
+            finish()
+        }
+
     }
 
     private fun startRecording() {

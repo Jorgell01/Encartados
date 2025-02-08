@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,4 +21,10 @@
         android:name="com.example.encartados.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <activity
+        android:id="@+id/nav_multi_function"
+        android:name="com.example.encartados.ui.multifunction.MultiFunctionActivity"
+        android:label="@string/menu_multi_function"
+        tools:layout="@layout/activity_multi_function" />
 </navigation>
