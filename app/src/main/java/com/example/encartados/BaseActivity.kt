@@ -1,4 +1,3 @@
-// BaseActivity.kt
 package com.example.encartados
 
 import android.content.Intent
@@ -13,7 +12,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.encartados.databinding.ActivityMainBinding
+import com.example.encartados.ui.auth.LoginActivity
 import com.example.encartados.ui.multifunction.MultiFunctionActivity
+import com.example.encartados.ui.stock.StockActivity
 import com.google.android.material.navigation.NavigationView
 
 open class BaseActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {

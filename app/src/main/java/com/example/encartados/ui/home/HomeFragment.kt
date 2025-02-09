@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.encartados.StockActivity
+import com.example.encartados.ui.stock.StockActivity
 import com.example.encartados.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

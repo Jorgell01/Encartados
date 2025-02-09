@@ -1,11 +1,13 @@
-package com.example.encartados
+package com.example.encartados.ui.stock
 
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import com.example.encartados.Cart
+import com.example.encartados.utils.adapters.CartAdapter
+import com.example.encartados.CartItem
 import com.example.encartados.databinding.DialogCartBinding
 
-// CartDialog.kt
 class CartDialog(context: Context, private val cart: Cart, private val onPurchaseCompleted: () -> Unit) : Dialog(context) {
 
     private lateinit var binding: DialogCartBinding

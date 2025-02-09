@@ -1,26 +1,31 @@
-package com.example.encartados
+package com.example.encartados.ui.stock
 
 import android.app.Dialog
 import android.content.ContentValues
 import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
-import com.example.encartados.databinding.DialogAddItemBinding
+import com.example.encartados.utils.adapters.StockItem
+import com.example.encartados.database.UserDatabaseHelper
+import com.example.encartados.databinding.DialogEditItemBinding
 
-class AddItemDialog(context: Context, private val dbHelper: UserDatabaseHelper, private val onItemAdded: () -> Unit) : Dialog(context) {
+class EditItemDialog(context: Context, private val stockItem: StockItem, private val dbHelper: UserDatabaseHelper, private val onItemEdited: () -> Unit) : Dialog(context) {
 
-    private lateinit var binding: DialogAddItemBinding
+    private lateinit var binding: DialogEditItemBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DialogAddItemBinding.inflate(layoutInflater)
+        binding = DialogEditItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnAdd.setOnClickListener {
+        binding.etItemName.setText(stockItem.name)
+        binding.etItemQuantity.setText(stockItem.quantity.toString())
+        binding.etItemPrice.setText(stockItem.price.toString())
+
+        binding.btnEdit.setOnClickListener {
             val itemName = binding.etItemName.text.toString()
             val itemQuantity = binding.etItemQuantity.text.toString().toIntOrNull()
             val itemPrice = binding.etItemPrice.text.toString().toDoubleOrNull()
-            val itemImageResId = R.drawable.pokemon_logo
 
             if (itemName.isEmpty() || itemQuantity == null || itemPrice == null) {
                 Toast.makeText(context, "All fields are required", Toast.LENGTH_SHORT).show()
@@ -32,17 +37,12 @@ class AddItemDialog(context: Context, private val dbHelper: UserDatabaseHelper, 
                 put(UserDatabaseHelper.COLUMN_ITEM_NAME, itemName)
                 put(UserDatabaseHelper.COLUMN_ITEM_QUANTITY, itemQuantity)
                 put(UserDatabaseHelper.COLUMN_ITEM_PRICE, itemPrice)
-                put(UserDatabaseHelper.COLUMN_ITEM_IMAGE, itemImageResId)
             }
 
-            val newRowId = db.insert(UserDatabaseHelper.TABLE_STOCK, null, values)
-            if (newRowId != -1L) {
-                Toast.makeText(context, "Item added successfully", Toast.LENGTH_SHORT).show()
-                onItemAdded()
-                dismiss()
-            } else {
-                Toast.makeText(context, "Failed to add item", Toast.LENGTH_SHORT).show()
-            }
+            db.update(UserDatabaseHelper.TABLE_STOCK, values, "${UserDatabaseHelper.COLUMN_STOCK_ID} = ?", arrayOf(stockItem.id.toString()))
+            Toast.makeText(context, "Item edited successfully", Toast.LENGTH_SHORT).show()
+            onItemEdited()
+            dismiss()
         }
 
         binding.btnCancel.setOnClickListener {

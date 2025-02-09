@@ -1,4 +1,3 @@
-// PowerConnectionFragment.kt
 package com.example.encartados.ui.multifunction
 
 import android.content.BroadcastReceiver

@@ -1,9 +1,10 @@
-package com.example.encartados
+package com.example.encartados.ui.stock
 
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
+import com.example.encartados.utils.adapters.StockItem
 import com.example.encartados.databinding.DialogAddToCartBinding
 
 class AddToCartDialog(context: Context, private val stockItem: StockItem, private val onItemAdded: (Int) -> Unit) : Dialog(context) {

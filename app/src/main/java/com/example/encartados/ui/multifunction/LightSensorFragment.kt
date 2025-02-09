@@ -55,7 +55,7 @@ class LightSensorFragment : Fragment(), SensorEventListener {
             binding?.textLightLevel?.text = "Nivel de luz: $lightLevel lx"
             binding?.textLightStatus?.text = when {
                 lightLevel < 100 -> "Oscuro"
-                lightLevel.toInt() in 100..2000 -> "Normal" // Convertimos a Int
+                lightLevel.toInt() in 100..2000 -> "Normal"
                 else -> "Brillante"
             }
 

@@ -1,11 +1,15 @@
-package com.example.encartados
+package com.example.encartados.ui.stock
 
-import android.content.ContentValues
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.encartados.Cart
+import com.example.encartados.R
+import com.example.encartados.utils.adapters.StockAdapter
+import com.example.encartados.utils.adapters.StockItem
+import com.example.encartados.database.UserDatabaseHelper
 import com.example.encartados.databinding.ActivityStockBinding
 
 class StockActivity : AppCompatActivity() {

@@ -1,5 +1,7 @@
 package com.example.encartados
 
+import com.example.encartados.utils.adapters.StockItem
+
 data class CartItem(val stockItem: StockItem, var quantity: Int)
 
 class Cart {

@@ -1,11 +1,11 @@
-package com.example.encartados
+package com.example.encartados.utils.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.encartados.CartItem
 import com.example.encartados.databinding.ItemCartBinding
 
-// CartAdapter.kt
 class CartAdapter(
     private var items: List<CartItem>,
     private val onRemoveItem: (CartItem) -> Unit,

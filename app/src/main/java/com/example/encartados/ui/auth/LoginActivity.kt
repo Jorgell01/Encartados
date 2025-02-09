@@ -1,10 +1,12 @@
-package com.example.encartados
+package com.example.encartados.ui.auth
 
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.encartados.MainActivity
+import com.example.encartados.database.UserDatabaseHelper
 import com.example.encartados.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -65,7 +67,11 @@ class LoginActivity : AppCompatActivity() {
         val db = dbHelper.readableDatabase
         val cursor = db.query(
             UserDatabaseHelper.TABLE_USERS,
-            arrayOf(UserDatabaseHelper.COLUMN_ID, UserDatabaseHelper.COLUMN_EMAIL, UserDatabaseHelper.COLUMN_NAME),
+            arrayOf(
+                UserDatabaseHelper.COLUMN_ID,
+                UserDatabaseHelper.COLUMN_EMAIL,
+                UserDatabaseHelper.COLUMN_NAME
+            ),
             "${UserDatabaseHelper.COLUMN_EMAIL} = ? AND ${UserDatabaseHelper.COLUMN_PASSWORD} = ?",
             arrayOf(email, password),
             null, null, null

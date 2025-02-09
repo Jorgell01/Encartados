@@ -1,4 +1,4 @@
-package com.example.encartados
+package com.example.encartados.utils.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

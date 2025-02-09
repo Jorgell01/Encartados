@@ -1,4 +1,3 @@
-// MultiFunctionPagerAdapter.kt
 package com.example.encartados.ui.multifunction
 
 import androidx.fragment.app.Fragment
